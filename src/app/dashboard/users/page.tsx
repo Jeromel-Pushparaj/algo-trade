@@ -1,7 +1,6 @@
-// pages/users.tsx
 'use client';
 import React, { useState } from 'react';
-import Layout from './layout';
+import Layout from '../layout';
 
 const usersData = [
   { id: 1, name: 'John Doe', email: 'john@example.com' },
@@ -28,6 +27,10 @@ const UsersPage: React.FC = () => {
     }
   };
 
+  const handleAddUser = () => {
+    alert('Add user button clicked!');
+  };
+
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -35,13 +38,21 @@ const UsersPage: React.FC = () => {
   return (
     <Layout>
       <h1 className="text-2xl font-bold mb-4">Users</h1>
-      <input
-        type="text"
-        placeholder="Search users..."
-        value={search}
-        onChange={handleSearch}
-        className="p-2 mb-4 border border-gray-400 rounded"
-      />
+      <div className="flex justify-between mb-4">
+        <input
+          type="text"
+          placeholder="Search users..."
+          value={search}
+          onChange={handleSearch}
+          className="p-2 border border-gray-400 rounded"
+        />
+        <button
+          onClick={handleAddUser}
+          className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Add User
+        </button>
+      </div>
       <table className="w-full bg-white shadow-md rounded-lg">
         <thead>
           <tr className="bg-gray-200">
@@ -56,7 +67,7 @@ const UsersPage: React.FC = () => {
               <td className="p-4">{user.name}</td>
               <td className="p-4">{user.email}</td>
               <td className="p-4">
-              <button
+                <button
                   onClick={() => handleDelete(user.id)}
                   className="text-green-500 mr-4"
                 >
